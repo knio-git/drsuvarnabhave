@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Suvarna Bhave | Physiotherapy & Rehab Clinic</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --warm-white: #faf8f4;
+    --sage: #7a9e87;
+    --deep-sage: #4a7059;
+    --clay: #c4845a;
+    --charcoal: #2a2a2a;
+    --mid: #5a5a52;
+    --light-sage: #d4e6da;
+    --accent-line: #c4845a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--charcoal);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--clay);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--sage);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.25s ease;
+    opacity: 0.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 22px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: transparent;
+    transition: background 0.4s, box-shadow 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(250,248,244,0.96);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+    backdrop-filter: blur(12px);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+  .logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.2s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1px;
+    background: var(--clay);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--charcoal); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    background: var(--deep-sage); color: #fff !important;
+    padding: 9px 22px !important; border-radius: 2px;
+    letter-spacing: 0.08em !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--clay) !important; }
+  .nav-cta::after { display: none !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 140px 80px 80px 80px;
+    position: relative; z-index: 2;
+  }
+  .hero-tag {
+    font-size: 0.72rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--clay);
+    margin-bottom: 24px;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--charcoal);
+    opacity: 0; transform: translateY(30px);
+    animation: fadeUp 0.9s 0.4s forwards;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--deep-sage);
+  }
+  .hero-line {
+    width: 60px; height: 2px;
+    background: var(--clay);
+    margin: 32px 0;
+    opacity: 0;
+    animation: lineGrow 0.7s 0.8s forwards;
+  }
+  .hero-desc {
+    font-size: 1rem; line-height: 1.7;
+    color: var(--mid); max-width: 400px;
+    font-weight: 300;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+  .hero-btns {
+    display: flex; gap: 16px; margin-top: 44px;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s 1.1s forwards;
+  }
+  .btn-primary {
+    background: var(--deep-sage); color: #fff;
+    padding: 14px 34px; border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem; letter-spacing: 0.1em;
+    text-transform: uppercase; cursor: pointer;
+    text-decoration: none;
+    transition: background 0.25s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--clay); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent; color: var(--charcoal);
+    padding: 14px 34px;
+    border: 1.5px solid var(--charcoal);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem; letter-spacing: 0.1em;
+    text-transform: uppercase; cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { background: var(--charcoal); color: #fff; }
+  .hero-right {
+    position: relative; overflow: hidden;
+    background: var(--light-sage);
+  }
+  .hero-bg-pattern {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--light-sage) 0%, #b8d4bf 100%);
+  }
+  .hero-visual {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    animation: fadeIn 1s 0.6s forwards;
+  }
+  /* Decorative anatomy/wellness SVG art */
+  .hero-stat-strip {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: var(--cream);
+    display: flex;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.3s forwards;
+  }
+  .stat-item {
+    flex: 1; padding: 28px 20px; text-align: center;
+    border-right: 1px solid rgba(0,0,0,0.06);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 300;
+    color: var(--deep-sage);
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--mid);
+  }
+
+  /* Floating deco circles on hero */
+  .deco-circle {
+    position: absolute; border-radius: 50%;
+    opacity: 0.15;
+    animation: float 6s ease-in-out infinite;
+  }
+  .deco-circle.c1 { width: 320px; height: 320px; background: var(--sage); top: 10%; right: 5%; animation-delay: 0s; }
+  .deco-circle.c2 { width: 180px; height: 180px; background: var(--clay); top: 55%; right: 20%; animation-delay: 2s; }
+  .deco-circle.c3 { width: 90px; height: 90px; background: var(--deep-sage); top: 30%; right: 45%; animation-delay: 4s; }
+
+  /* ── ABOUT ── */
+  #about {
+    padding: 120px 80px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    background: var(--warm-white);
+    position: relative;
+  }
+  .about-img-block {
+    position: relative;
+  }
+  .about-img-frame {
+    width: 100%; aspect-ratio: 4/5;
+    background: var(--light-sage);
+    position: relative; overflow: hidden;
+  }
+  .about-img-svg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-accent-box {
+    position: absolute;
+    bottom: -24px; right: -24px;
+    width: 140px; height: 140px;
+    background: var(--clay); opacity: 0.12;
+    z-index: -1;
+  }
+  .about-years-badge {
+    position: absolute; top: 24px; left: -24px;
+    background: var(--deep-sage); color: #fff;
+    padding: 20px 24px; text-align: center;
+  }
+  .about-years-badge .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300;
+    display: block; line-height: 1;
+  }
+  .about-years-badge .txt {
+    font-size: 0.65rem; letter-spacing: 0.1em;
+    text-transform: uppercase; opacity: 0.8;
+  }
+  .about-content {}
+  .section-tag {
+    font-size: 0.72rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--clay);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300; line-height: 1.2;
+    color: var(--charcoal); margin-bottom: 24px;
+  }
+  .section-title em { font-style: italic; color: var(--deep-sage); }
+  .about-text {
+    font-size: 0.95rem; line-height: 1.85;
+    color: var(--mid); margin-bottom: 16px;
+    font-weight: 300;
+  }
+  .about-quals { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+  .qual-item {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 0.88rem; color: var(--mid);
+  }
+  .qual-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--sage); flex-shrink: 0;
+  }
+
+  /* ── SERVICES ── */
+  #services {
+    padding: 120px 80px;
+    background: var(--cream);
+    position: relative;
+  }
+  .services-header {
+    text-align: center; margin-bottom: 72px;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .service-card {
+    background: var(--warm-white);
+    padding: 52px 40px;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: default;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0;
+    width: 0; height: 3px;
+    background: var(--clay);
+    transition: width 0.4s ease;
+  }
+  .service-card:hover { transform: translateY(-6px); }
+  .service-card:hover::before { width: 100%; }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300;
+    color: var(--light-sage);
+    line-height: 1; margin-bottom: 20px;
+    transition: color 0.3s;
+  }
+  .service-card:hover .service-num { color: var(--sage); }
+  .service-icon {
+    width: 44px; height: 44px;
+    background: var(--light-sage);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    transition: background 0.3s;
+  }
+  .service-card:hover .service-icon { background: var(--sage); }
+  .service-icon svg { width: 22px; height: 22px; }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 400;
+    color: var(--charcoal); margin-bottom: 12px;
+  }
+  .service-desc {
+    font-size: 0.85rem; line-height: 1.7;
+    color: var(--mid); font-weight: 300;
+  }
+
+  /* ── CONDITIONS ── */
+  #conditions {
+    padding: 120px 80px;
+    background: var(--charcoal);
+    color: #fff; position: relative; overflow: hidden;
+  }
+  .conditions-bg-text {
+    position: absolute; top: -20px; right: -40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20vw; font-weight: 300;
+    color: rgba(255,255,255,0.03);
+    white-space: nowrap; pointer-events: none;
+    line-height: 1;
+  }
+  .conditions-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: start; position: relative; z-index: 2;
+  }
+  .conditions-left .section-tag { color: var(--sage); }
+  .conditions-left .section-title { color: #fff; }
+  .conditions-left p {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.95rem; line-height: 1.85; font-weight: 300;
+    margin-bottom: 36px;
+  }
+  .conditions-grid {
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .condition-tag {
+    padding: 8px 18px;
+    border: 1px solid rgba(255,255,255,0.12);
+    font-size: 0.78rem; letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.7);
+    border-radius: 1px;
+    transition: all 0.25s;
+    cursor: default;
+  }
+  .condition-tag:hover {
+    border-color: var(--sage); color: #fff;
+    background: rgba(122,158,135,0.12);
+  }
+
+  /* ── PROCESS ── */
+  #process {
+    padding: 120px 80px;
+    background: var(--warm-white);
+  }
+  .process-header { text-align: center; margin-bottom: 80px; }
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; position: relative;
+  }
+  .process-steps::before {
+    content: '';
+    position: absolute; top: 40px; left: 12.5%; right: 12.5%;
+    height: 1px; background: var(--light-sage);
+  }
+  .process-step { padding: 0 24px; text-align: center; }
+  .step-circle {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: var(--cream); border: 2px solid var(--light-sage);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; color: var(--deep-sage);
+    position: relative; z-index: 2;
+    transition: all 0.3s;
+  }
+  .process-step:hover .step-circle {
+    background: var(--deep-sage); color: #fff;
+    border-color: var(--deep-sage);
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 400;
+    color: var(--charcoal); margin-bottom: 10px;
+  }
+  .step-desc {
+    font-size: 0.82rem; line-height: 1.65;
+    color: var(--mid); font-weight: 300;
+  }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials {
+    padding: 120px 80px;
+    background: var(--cream);
+    position: relative; overflow: hidden;
+  }
+  .testimonials-header { text-align: center; margin-bottom: 72px; }
+  .testimonials-track {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .testimonial-card {
+    background: var(--warm-white);
+    padding: 44px 36px;
+    position: relative;
+  }
+  .testimonial-card::before {
+    content: '\201C';
+    position: absolute; top: 20px; left: 28px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; line-height: 1;
+    color: var(--light-sage);
+  }
+  .testimonial-text {
+    font-size: 0.9rem; line-height: 1.8;
+    color: var(--mid); font-weight: 300;
+    margin-bottom: 28px; position: relative; z-index: 1;
+  }
+  .testimonial-name {
+    font-size: 0.85rem; font-weight: 500;
+    color: var(--charcoal); margin-bottom: 3px;
+  }
+  .testimonial-detail {
+    font-size: 0.75rem; color: var(--sage);
+    letter-spacing: 0.06em;
+  }
+  .stars { color: var(--clay); margin-bottom: 16px; font-size: 0.85rem; }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding: 120px 80px;
+    background: var(--warm-white);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: start;
+  }
+  .contact-info {}
+  .contact-info .section-title { margin-bottom: 32px; }
+  .contact-items { display: flex; flex-direction: column; gap: 28px; margin-bottom: 44px; }
+  .contact-item { display: flex; gap: 20px; align-items: flex-start; }
+  .contact-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: var(--light-sage); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .contact-icon svg { width: 20px; height: 20px; color: var(--deep-sage); }
+  .contact-detail h4 {
+    font-size: 0.78rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--clay);
+    margin-bottom: 5px;
+  }
+  .contact-detail p {
+    font-size: 0.92rem; color: var(--mid);
+    line-height: 1.6; font-weight: 300;
+  }
+  .contact-form-block {}
+  .form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300;
+    color: var(--charcoal); margin-bottom: 32px;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label {
+    font-size: 0.72rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--mid);
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    background: var(--cream);
+    border: 1px solid transparent;
+    border-bottom-color: rgba(0,0,0,0.12);
+    padding: 12px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem; color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    resize: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--sage);
+    background: #fff;
+  }
+  .form-submit {
+    margin-top: 24px;
+    width: 100%; padding: 16px;
+    background: var(--deep-sage); color: #fff;
+    border: none; font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem; letter-spacing: 0.12em;
+    text-transform: uppercase; cursor: pointer;
+    transition: background 0.25s;
+  }
+  .form-submit:hover { background: var(--clay); }
+  .hours-block {
+    margin-top: 36px; padding: 28px;
+    background: var(--cream);
+    border-left: 3px solid var(--sage);
+  }
+  .hours-title {
+    font-size: 0.72rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--clay);
+    margin-bottom: 14px;
+  }
+  .hours-row {
+    display: flex; justify-content: space-between;
+    font-size: 0.85rem; color: var(--mid);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .hours-row:last-child { border-bottom: none; }
+  .hours-row span:first-child { font-weight: 400; color: var(--charcoal); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal); color: rgba(255,255,255,0.5);
+    padding: 44px 80px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.04em;
+  }
+  .footer-logo span { color: var(--clay); }
+  .footer-text { font-size: 0.78rem; }
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-style: italic;
+    color: var(--sage);
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  @keyframes lineGrow {
+    to { opacity: 1; }
+    from { width: 0; }
+    to { width: 60px; opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-18px); }
+  }
+  @keyframes pulse-ring {
+    0% { transform: translate(-50%,-50%) scale(1); opacity: 0.7; }
+    100% { transform: translate(-50%,-50%) scale(1.3); opacity: 0; }
+  }
+
+  /* Marquee strip */
+  .marquee-wrap {
+    overflow: hidden;
+    background: var(--deep-sage);
+    padding: 14px 0;
+  }
+  .marquee-track {
+    display: flex; white-space: nowrap;
+    animation: marquee 20s linear infinite;
+  }
+  .marquee-item {
+    font-size: 0.72rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(255,255,255,0.7);
+    padding: 0 48px;
+  }
+  .marquee-dot { color: var(--clay); margin-right: 48px; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Map placeholder */
+  .map-block {
+    background: var(--light-sage);
+    height: 200px; display: flex; align-items: center;
+    justify-content: center; margin-top: 28px;
+    position: relative; overflow: hidden;
+  }
+  .map-pin {
+    width: 40px; height: 40px;
+    background: var(--clay); border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    position: relative; animation: pinBounce 2s ease-in-out infinite;
+  }
+  .map-pin::after {
+    content: ''; position: absolute;
+    top: 50%; left: 50%;
+    width: 14px; height: 14px;
+    background: #fff; border-radius: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .map-address {
+    position: absolute; bottom: 16px;
+    font-size: 0.78rem; color: var(--deep-sage);
+    letter-spacing: 0.06em; text-align: center;
+    width: 100%;
+  }
+  @keyframes pinBounce {
+    0%, 100% { transform: rotate(-45deg) translateY(0); }
+    50% { transform: rotate(-45deg) translateY(-10px); }
+  }
+
+  /* ── Wellness Visual SVG ── */
+  .wellness-svg { width: 80%; max-width: 360px; }
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="logo">Dr. <span>Suvarna Bhave</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#conditions">Conditions</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Book Appointment</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Karve Nagar · Pune · Est. 2015</p>
+    <h1 class="hero-title">
+      Restoring<br><em>movement</em>,<br>rebuilding<br>lives.
+    </h1>
+    <div class="hero-line"></div>
+    <p class="hero-desc">Expert physiotherapy and rehabilitation care by Dr. Suvarna Bhave. Evidence-based treatments to relieve pain, restore function, and empower lasting recovery.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Book a Session</a>
+      <a href="#services" class="btn-ghost">Our Services</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg-pattern"></div>
+    <div class="deco-circle c1"></div>
+    <div class="deco-circle c2"></div>
+    <div class="deco-circle c3"></div>
+    <div class="hero-visual">
+      <!-- Wellness illustration -->
+      <svg class="wellness-svg" viewBox="0 0 340 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Body figure - simplified human form -->
+        <circle cx="170" cy="70" r="44" fill="none" stroke="#4a7059" stroke-width="1.5" opacity="0.6"/>
+        <circle cx="170" cy="70" r="30" fill="none" stroke="#4a7059" stroke-width="0.8" opacity="0.3" stroke-dasharray="4 4"/>
+        <!-- Head -->
+        <circle cx="170" cy="70" r="26" fill="#b8d4bf" opacity="0.5"/>
+        <!-- Spine -->
+        <line x1="170" y1="96" x2="170" y2="260" stroke="#4a7059" stroke-width="1.5" opacity="0.5"/>
+        <!-- Ribcage -->
+        <ellipse cx="170" cy="160" rx="54" ry="46" fill="none" stroke="#7a9e87" stroke-width="1.2" opacity="0.45"/>
+        <ellipse cx="170" cy="160" rx="38" ry="32" fill="none" stroke="#7a9e87" stroke-width="0.8" opacity="0.3"/>
+        <!-- Shoulders -->
+        <path d="M116 120 Q90 115 76 140" stroke="#4a7059" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <path d="M224 120 Q250 115 264 140" stroke="#4a7059" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <!-- Arms -->
+        <path d="M76 140 Q68 190 80 240" stroke="#7a9e87" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <path d="M264 140 Q272 190 260 240" stroke="#7a9e87" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <!-- Hands -->
+        <circle cx="80" cy="244" r="10" fill="none" stroke="#7a9e87" stroke-width="1" opacity="0.4"/>
+        <circle cx="260" cy="244" r="10" fill="none" stroke="#7a9e87" stroke-width="1" opacity="0.4"/>
+        <!-- Pelvis -->
+        <ellipse cx="170" cy="268" rx="42" ry="20" fill="none" stroke="#4a7059" stroke-width="1.2" opacity="0.4"/>
+        <!-- Legs -->
+        <path d="M142 280 Q136 340 138 400" stroke="#7a9e87" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <path d="M198 280 Q204 340 202 400" stroke="#7a9e87" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <!-- Feet -->
+        <ellipse cx="138" cy="404" rx="16" ry="8" fill="none" stroke="#7a9e87" stroke-width="1" opacity="0.4"/>
+        <ellipse cx="202" cy="404" rx="16" ry="8" fill="none" stroke="#7a9e87" stroke-width="1" opacity="0.4"/>
+        <!-- Pulse/heart lines -->
+        <polyline points="80,320 95,320 105,298 118,342 130,310 145,320 160,320" stroke="#c4845a" stroke-width="1.5" fill="none" opacity="0.7"/>
+        <!-- Decorative circles -->
+        <circle cx="68" cy="320" r="4" fill="#c4845a" opacity="0.5"/>
+        <circle cx="172" cy="320" r="4" fill="#c4845a" opacity="0.5"/>
+        <!-- Label lines -->
+        <line x1="224" y1="160" x2="280" y2="150" stroke="rgba(74,112,89,0.3)" stroke-width="0.8"/>
+        <text x="284" y="154" font-family="'DM Sans'" font-size="10" fill="rgba(74,112,89,0.6)">Spine</text>
+        <line x1="224" y1="200" x2="280" y2="210" stroke="rgba(74,112,89,0.3)" stroke-width="0.8"/>
+        <text x="284" y="214" font-family="'DM Sans'" font-size="10" fill="rgba(74,112,89,0.6)">Core</text>
+        <line x1="116" y1="268" x2="60" y2="280" stroke="rgba(74,112,89,0.3)" stroke-width="0.8"/>
+        <text x="10" y="284" font-family="'DM Sans'" font-size="10" fill="rgba(74,112,89,0.6)">Joints</text>
+      </svg>
+    </div>
+    <div class="hero-stat-strip">
+      <div class="stat-item">
+        <span class="stat-num">15+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">5000+</span>
+        <span class="stat-label">Patients Treated</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">20+</span>
+        <span class="stat-label">Conditions Treated</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Orthopaedic Rehab</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Sports Physiotherapy</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Neuro Rehabilitation</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Post-Surgical Recovery</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Pain Management</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Manual Therapy</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Women's Health</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Electrotherapy</span><span class="marquee-dot">✦</span>
+    <!-- repeat for seamless loop -->
+    <span class="marquee-item">Orthopaedic Rehab</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Sports Physiotherapy</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Neuro Rehabilitation</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Post-Surgical Recovery</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Pain Management</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Manual Therapy</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Women's Health</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Electrotherapy</span><span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img-block reveal">
+    <div class="about-img-frame">
+      <div class="about-img-svg">
+        <!-- Portrait illustration -->
+        <svg viewBox="0 0 280 360" width="85%" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="280" height="360" fill="#b8d4bf" opacity="0.3"/>
+          <!-- Coat -->
+          <rect x="60" y="170" width="160" height="200" rx="4" fill="#4a7059" opacity="0.15"/>
+          <!-- Collar -->
+          <path d="M120 170 L140 220 L160 170" fill="#fff" opacity="0.5"/>
+          <!-- Stethoscope hint -->
+          <path d="M100 200 Q80 240 90 260 Q100 280 120 274" stroke="#c4845a" stroke-width="2.5" fill="none" opacity="0.6"/>
+          <circle cx="120" cy="275" r="8" fill="#c4845a" opacity="0.4"/>
+          <!-- Body -->
+          <ellipse cx="140" cy="230" rx="70" ry="80" fill="#d4e6da" opacity="0.4"/>
+          <!-- Head -->
+          <ellipse cx="140" cy="100" rx="58" ry="68" fill="#e8c9a8" opacity="0.55"/>
+          <!-- Hair -->
+          <ellipse cx="140" cy="60" rx="58" ry="35" fill="#5a3e28" opacity="0.3"/>
+          <!-- Face features -->
+          <ellipse cx="122" cy="100" rx="7" ry="8" fill="#5a3e28" opacity="0.3"/>
+          <ellipse cx="158" cy="100" rx="7" ry="8" fill="#5a3e28" opacity="0.3"/>
+          <path d="M126 126 Q140 138 154 126" stroke="#5a3e28" stroke-width="1.5" fill="none" opacity="0.4"/>
+          <!-- Name plate -->
+          <rect x="80" y="300" width="120" height="36" rx="2" fill="white" opacity="0.7"/>
+          <text x="140" y="315" text-anchor="middle" font-family="'Cormorant Garamond'" font-size="11" fill="#4a7059" font-weight="400">Dr. Suvarna Bhave</text>
+          <text x="140" y="328" text-anchor="middle" font-family="'DM Sans'" font-size="8" fill="#7a9e87" letter-spacing="0.08em">BPTh · MPTh</text>
+        </svg>
+      </div>
+    </div>
+    <div class="about-accent-box"></div>
+    <div class="about-years-badge">
+      <span class="num">15</span>
+      <span class="txt">Years of<br>Healing</span>
+    </div>
+  </div>
+  <div class="about-content reveal reveal-delay-2">
+    <p class="section-tag">About the Doctor</p>
+    <h2 class="section-title">Dedicated to your <em>recovery</em> &amp; wellbeing</h2>
+    <p class="about-text">Dr. Suvarna Bhave is a highly experienced physiotherapist based in Karve Nagar, Pune, with over 15 years of dedicated clinical practice. She holds a Bachelor of Physiotherapy (BPTh) and a Master of Physiotherapy (MPTh), and has treated thousands of patients across all age groups.</p>
+    <p class="about-text">Her clinic — Dr. Suvarna Bhave Physiotherapy & Rehab — is a trusted destination for comprehensive physiotherapy and rehabilitation services in the Karve Nagar and Tathawade Garden area of Pune.</p>
+    <div class="about-quals">
+      <div class="qual-item"><div class="qual-dot"></div><span>BPTh, MPTh — Qualified Physiotherapist</span></div>
+      <div class="qual-item"><div class="qual-dot"></div><span>Specialised in Orthopedic & Neuro Rehabilitation</span></div>
+      <div class="qual-item"><div class="qual-dot"></div><span>Advanced Electrotherapy & Manual Therapy</span></div>
+      <div class="qual-item"><div class="qual-dot"></div><span>Post-surgical & Sports Injury Expert</span></div>
+      <div class="qual-item"><div class="qual-dot"></div><span>Women's Health & Pre/Post-natal Physiotherapy</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header reveal">
+    <p class="section-tag">What We Offer</p>
+    <h2 class="section-title">Comprehensive <em>treatments</em> &amp; therapies</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">01</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" stroke="#4a7059" stroke-width="1.5" fill="none"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+      </div>
+      <h3 class="service-name">Orthopaedic Physiotherapy</h3>
+      <p class="service-desc">Treatment for bone, joint, and muscle conditions including knee pain, back pain, frozen shoulder, and fracture rehabilitation.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">02</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" stroke="#4a7059" stroke-width="1.5" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      </div>
+      <h3 class="service-name">Neuro Rehabilitation</h3>
+      <p class="service-desc">Specialised rehab for stroke, Bell's palsy, Parkinson's disease, hemiplegia, and other neurological conditions.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-num">03</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" stroke="#4a7059" stroke-width="1.5" fill="none"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <h3 class="service-name">Sports Physiotherapy</h3>
+      <p class="service-desc">Injury assessment and recovery for ACL tears, tennis elbow, ankle sprains, muscle strains and return-to-sport programmes.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">04</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" stroke="#4a7059" stroke-width="1.5" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      <h3 class="service-name">Post-Surgical Rehab</h3>
+      <p class="service-desc">Structured recovery programmes after hip/knee replacement, spinal surgery, ACL repair and other orthopaedic procedures.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">05</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" stroke="#4a7059" stroke-width="1.5" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3 class="service-name">Electrotherapy</h3>
+      <p class="service-desc">IFT, Ultrasound therapy, TENS, SWD and muscle stimulation for pain relief, inflammation reduction and tissue healing.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-num">06</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" stroke="#4a7059" stroke-width="1.5" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <h3 class="service-name">Women's Health & Antenatal</h3>
+      <p class="service-desc">Pre and post-natal physiotherapy, pelvic floor rehabilitation, posture correction and postpartum recovery support.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONDITIONS -->
+<section id="conditions">
+  <div class="conditions-bg-text">Heal</div>
+  <div class="conditions-inner">
+    <div class="conditions-left reveal">
+      <p class="section-tag">Conditions We Treat</p>
+      <h2 class="section-title">Relief from pain.<br><em>Return to life.</em></h2>
+      <p>Our clinic addresses a wide spectrum of musculoskeletal, neurological and post-surgical conditions. No matter your age or activity level, we create a personalised plan for your recovery.</p>
+      <a href="#contact" class="btn-primary" style="display:inline-block;">Start Your Recovery</a>
+    </div>
+    <div class="conditions-right reveal reveal-delay-2">
+      <div class="conditions-grid">
+        <span class="condition-tag">Back Pain</span>
+        <span class="condition-tag">Neck Pain</span>
+        <span class="condition-tag">Frozen Shoulder</span>
+        <span class="condition-tag">Knee Osteoarthritis</span>
+        <span class="condition-tag">Sciatica</span>
+        <span class="condition-tag">Spondylosis</span>
+        <span class="condition-tag">Disc Herniation</span>
+        <span class="condition-tag">Tennis Elbow</span>
+        <span class="condition-tag">Plantar Fasciitis</span>
+        <span class="condition-tag">ACL Injury</span>
+        <span class="condition-tag">Stroke Rehab</span>
+        <span class="condition-tag">Bell's Palsy</span>
+        <span class="condition-tag">Parkinson's</span>
+        <span class="condition-tag">Carpal Tunnel</span>
+        <span class="condition-tag">Fibromyalgia</span>
+        <span class="condition-tag">Ankle Sprain</span>
+        <span class="condition-tag">Hip Pain</span>
+        <span class="condition-tag">Postural Problems</span>
+        <span class="condition-tag">Sports Injuries</span>
+        <span class="condition-tag">Post-fracture Rehab</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="process-header reveal">
+    <p class="section-tag">How It Works</p>
+    <h2 class="section-title">Your path to <em>recovery</em></h2>
+  </div>
+  <div class="process-steps">
+    <div class="process-step reveal reveal-delay-1">
+      <div class="step-circle">1</div>
+      <h3 class="step-title">Consultation</h3>
+      <p class="step-desc">Detailed assessment of your pain, history, and lifestyle to understand your unique condition.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-2">
+      <div class="step-circle">2</div>
+      <h3 class="step-title">Diagnosis</h3>
+      <p class="step-desc">Clinical evaluation and functional movement analysis to pinpoint root causes of your discomfort.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-3">
+      <div class="step-circle">3</div>
+      <h3 class="step-title">Treatment Plan</h3>
+      <p class="step-desc">A personalised, evidence-based therapy programme tailored to your goals and timeline.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-4">
+      <div class="step-circle">4</div>
+      <h3 class="step-title">Recovery & Beyond</h3>
+      <p class="step-desc">Ongoing sessions, home exercise guidance, and lifestyle advice to maintain long-term results.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-header reveal">
+    <p class="section-tag">Patient Stories</p>
+    <h2 class="section-title">What our patients <em>say</em></h2>
+  </div>
+  <div class="testimonials-track">
+    <div class="testimonial-card reveal reveal-delay-1">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">After my knee replacement, I was worried about recovery. Dr. Bhave's structured programme had me walking comfortably within weeks. Her dedication and knowledge are truly exceptional.</p>
+      <div class="testimonial-name">Ramesh Patil</div>
+      <div class="testimonial-detail">Knee Replacement Rehab · Karve Nagar</div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-2">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">Suffered with chronic back pain for years. After just 10 sessions using a combination of manual therapy and electrotherapy, I felt like a new person. Highly recommended!</p>
+      <div class="testimonial-name">Priya Deshmukh</div>
+      <div class="testimonial-detail">Chronic Back Pain · Kothrud</div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-3">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">The antenatal physiotherapy sessions with Dr. Bhave were a blessing during my pregnancy. Her gentle, expert guidance made my delivery and recovery smooth and safe.</p>
+      <div class="testimonial-name">Snehal Kulkarni</div>
+      <div class="testimonial-detail">Antenatal Physiotherapy · Pune</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-info reveal">
+    <p class="section-tag">Get In Touch</p>
+    <h2 class="section-title">Visit our <em>clinic</em></h2>
+    <div class="contact-items">
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <div class="contact-detail">
+          <h4>Address</h4>
+          <p>Near Tathawade Garden,<br>Karve Nagar, Pune — 411052<br>Maharashtra, India</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        </div>
+        <div class="contact-detail">
+          <h4>Phone</h4>
+          <p>+91 — Available on Request<br><small style="font-size:0.78rem;opacity:0.7">Call or WhatsApp for appointments</small></p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <div class="contact-detail">
+          <h4>Email</h4>
+          <p>info@drsuvarnabhave.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="hours-block">
+      <div class="hours-title">Clinic Timings</div>
+      <div class="hours-row"><span>Monday – Friday</span><span>9:00 AM – 1:00 PM &amp; 5:00 – 8:00 PM</span></div>
+      <div class="hours-row"><span>Saturday</span><span>9:00 AM – 2:00 PM</span></div>
+      <div class="hours-row"><span>Sunday</span><span>By Appointment Only</span></div>
+    </div>
+    <div class="map-block">
+      <div class="map-pin"></div>
+      <div class="map-address">Near Tathawade Garden · Karve Nagar · Pune 411052</div>
+    </div>
+  </div>
+  <div class="contact-form-block reveal reveal-delay-2">
+    <h3 class="form-title">Book an appointment</h3>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>First Name</label>
+        <input type="text" placeholder="Rahul">
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" placeholder="Sharma">
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" placeholder="+91 98765 43210">
+      </div>
+      <div class="form-group">
+        <label>Preferred Date</label>
+        <input type="date">
+      </div>
+      <div class="form-group full">
+        <label>Condition / Service Required</label>
+        <select>
+          <option value="">Select a service…</option>
+          <option>Orthopaedic Physiotherapy</option>
+          <option>Neuro Rehabilitation</option>
+          <option>Sports Physiotherapy</option>
+          <option>Post-Surgical Rehab</option>
+          <option>Electrotherapy</option>
+          <option>Women's Health / Antenatal</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>Brief Description</label>
+        <textarea rows="4" placeholder="Tell us about your condition, pain level, or any previous treatments…"></textarea>
+      </div>
+    </div>
+    <button class="form-submit" onclick="alert('Thank you! We will get back to you shortly to confirm your appointment.')">Request Appointment</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Dr. <span>Suvarna Bhave</span></div>
+  <div class="footer-tagline">"Move better. Feel stronger. Live fully."</div>
+  <div class="footer-text">© 2025 · Physiotherapy &amp; Rehab Clinic · Karve Nagar, Pune</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    setTimeout(() => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top = e.clientY + 'px';
+    }, 60);
+  });
+  document.querySelectorAll('a, button, .service-card, .condition-tag').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.transform = 'translate(-50%,-50%) scale(1.8)'; ring.style.borderColor = 'var(--clay)'; });
+    el.addEventListener('mouseleave', () => { ring.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.borderColor = 'var(--sage)'; });
+  });
+
+  // Nav scroll
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Animated stat numbers
+  function animateCount(el, target, suffix='') {
+    let start = 0;
+    const duration = 1800;
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const nums = entry.target.querySelectorAll('.stat-num');
+        nums[0] && animateCount(nums[0], 15, '+');
+        nums[1] && animateCount(nums[1], 5000, '+');
+        nums[2] && animateCount(nums[2], 20, '+');
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  const strip = document.querySelector('.hero-stat-strip');
+  if (strip) statsObserver.observe(strip);
+</script>
+</body>
+</html>
